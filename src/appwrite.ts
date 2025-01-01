@@ -5,6 +5,6 @@ const account = new Account(client);
 
 client
     .setEndpoint('http://localhost/v1') 
-    .setProject('5fca3f6d5fb7a')
+    .setProject('6774db4f0019e0f9e984')
 
 export { client, account };

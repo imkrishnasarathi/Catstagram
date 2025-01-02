@@ -1,6 +1,11 @@
+import Navbar from './Navbar';
+
 function Home(){
     return(
-        <h1>Hii</h1>
+        <>
+            <Navbar/>
+            <h1>Hii</h1>
+        </>
     )
 }
 

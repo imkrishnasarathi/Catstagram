@@ -12,7 +12,7 @@ import {
 import {
     Search as SearchIcon,
     Home as HomeIcon,
-    Favorite as FavoriteIcon,
+    FavoriteBorder as FavoriteBorderIcon, // Updated icon
     AccountCircle as AccountCircleIcon,
 } from '@mui/icons-material';
 
@@ -30,7 +30,7 @@ const Logo = styled(Typography)(() => ({
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, .12),
+    backgroundColor: alpha(theme.palette.common.white, 0.12),
     marginRight: theme.spacing(2),
     marginLeft: 0,
     opacity: 0.5,
@@ -88,13 +88,12 @@ const Navbar: React.FC = () => {
                 <div>
                     <IconButton color="inherit">
                         <Badge badgeContent={4} color="secondary">
-                            <FavoriteIcon />
+                            <FavoriteBorderIcon /> {/* Hollow heart */}
                         </Badge>
                     </IconButton>
                 </div>
             </StyledToolbar>
         </AppBar>
-
     );
 };
 

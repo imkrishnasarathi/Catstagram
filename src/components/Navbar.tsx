@@ -44,20 +44,21 @@ const Search = styled('div')(({ theme }) => ({
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
+    padding: theme.spacing(0, 1),
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    left: theme.spacing(.5),
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
     '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+        padding: theme.spacing(1, 1, 1, 4),
+        paddingLeft: theme.spacing(3),
         transition: theme.transitions.create('width'),
         width: '100%',
         [theme.breakpoints.up('md')]: {
@@ -68,7 +69,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const Navbar: React.FC = () => {
     return (
-        <AppBar position="static">
+        <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none', borderBottom: '1px solid grey' }}>
             <StyledToolbar>
                 <IconButton color="inherit">
                     <HomeIcon />
@@ -97,6 +98,7 @@ const Navbar: React.FC = () => {
                 </div>
             </StyledToolbar>
         </AppBar>
+
     );
 };
 

@@ -2,6 +2,11 @@
   background-color: #222222;
 }
 
+body{
+  margin: 0;
+  padding: 0;
+}
+
 @media (min-width: 650px) {
   :root {
     background-color: #3a3a3a;

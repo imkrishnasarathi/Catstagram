@@ -16,14 +16,13 @@ import {
     AccountCircle as AccountCircleIcon,
 } from '@mui/icons-material';
 
-// Styled components using the MUI v5 styled utility
-const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+const StyledToolbar = styled(Toolbar)(() => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
 }));
 
-const Logo = styled(Typography)(({ theme }) => ({
+const Logo = styled(Typography)(() => ({
     flexGrow: 1,
     textAlign: 'center',
 }));

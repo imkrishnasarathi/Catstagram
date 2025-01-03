@@ -88,7 +88,7 @@ const Navbar: React.FC = () => {
                 <div>
                     <IconButton color="inherit">
                         <Badge badgeContent={4} color="secondary">
-                            <FavoriteBorderIcon /> {/* Hollow heart */}
+                            <FavoriteBorderIcon />
                         </Badge>
                     </IconButton>
                 </div>

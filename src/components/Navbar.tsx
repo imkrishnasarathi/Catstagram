@@ -11,7 +11,6 @@ import {
 } from '@mui/material';
 import {
     Search as SearchIcon,
-    Home as HomeIcon,
     FavoriteBorder as FavoriteBorderIcon, 
 } from '@mui/icons-material';
 
@@ -23,7 +22,7 @@ const StyledToolbar = styled(Toolbar)(() => ({
 
 const Logo = styled(Typography)(() => ({
     flexGrow: 1,
-    textAlign: 'center',
+    textAlign: 'left',
 }));
 
 const Search = styled('div')(({ theme }) => ({
@@ -69,9 +68,6 @@ const Navbar: React.FC = () => {
     return (
         <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none', borderBottom: '2px solid rgba(145, 145, 145, .23)' }}>
             <StyledToolbar>
-                <IconButton color="inherit">
-                    <HomeIcon />
-                </IconButton>
                 <Logo variant="h6" noWrap>
                     Catstagram
                 </Logo>

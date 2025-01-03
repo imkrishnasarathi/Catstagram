@@ -12,8 +12,7 @@ import {
 import {
     Search as SearchIcon,
     Home as HomeIcon,
-    FavoriteBorder as FavoriteBorderIcon, // Updated icon
-    AccountCircle as AccountCircleIcon,
+    FavoriteBorder as FavoriteBorderIcon, 
 } from '@mui/icons-material';
 
 const StyledToolbar = styled(Toolbar)(() => ({

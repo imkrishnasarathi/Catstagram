@@ -28,7 +28,6 @@ const Logo = styled(Typography)(() => ({
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
-    // display: 'block';
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.12),
     marginRight: theme.spacing(2),

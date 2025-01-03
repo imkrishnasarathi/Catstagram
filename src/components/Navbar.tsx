@@ -30,12 +30,10 @@ const Logo = styled(Typography)(() => ({
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
+    backgroundColor: alpha(theme.palette.common.white, .12),
     marginRight: theme.spacing(2),
     marginLeft: 0,
+    opacity: 0.5,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
         marginLeft: theme.spacing(3),
@@ -44,21 +42,22 @@ const Search = styled('div')(({ theme }) => ({
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 1),
+    padding: theme.spacing(0, 1.4),
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    left: theme.spacing(.5),
+    left: 0,
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
+    boxSizing: 'border-box',
     '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 4),
-        paddingLeft: theme.spacing(3),
+        padding: theme.spacing(1, 1, 1, 5),
+        paddingLeft: `calc(1em + ${theme.spacing(5)}px)`,
         transition: theme.transitions.create('width'),
         width: '100%',
         [theme.breakpoints.up('md')]: {
@@ -69,7 +68,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const Navbar: React.FC = () => {
     return (
-        <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none', borderBottom: '1px solid grey' }}>
+        <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none', borderBottom: '2px solid rgba(145, 145, 145, .23)' }}>
             <StyledToolbar>
                 <IconButton color="inherit">
                     <HomeIcon />

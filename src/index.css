@@ -1,5 +1,5 @@
 :root{
-  background-color: #222222;
+  background-color: #171717;
 }
 
 body{
@@ -9,6 +9,6 @@ body{
 
 @media (min-width: 650px) {
   :root {
-    background-color: #3a3a3a;
+    background-color: #171717;
   }
 }

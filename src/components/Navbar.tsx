@@ -23,6 +23,7 @@ const StyledToolbar = styled(Toolbar)(() => ({
 const Logo = styled(Typography)(() => ({
     flexGrow: 1,
     textAlign: 'left',
+    fontFamily: 'Grand Hotel, cursive',
 }));
 
 const Search = styled('div')(({ theme }) => ({

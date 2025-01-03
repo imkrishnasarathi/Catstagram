@@ -91,9 +91,6 @@ const Navbar: React.FC = () => {
                             <FavoriteIcon />
                         </Badge>
                     </IconButton>
-                    <IconButton edge="end" color="inherit">
-                        <AccountCircleIcon />
-                    </IconButton>
                 </div>
             </StyledToolbar>
         </AppBar>

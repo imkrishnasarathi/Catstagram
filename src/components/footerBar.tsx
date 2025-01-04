@@ -4,6 +4,7 @@ import {
     Toolbar,
     IconButton,
     styled,
+    Box,
 } from '@mui/material';
 import {
     Home as HomeIcon,
@@ -16,6 +17,13 @@ const StyledToolbar = styled(Toolbar)(() => ({
     justifyContent: 'space-around',
     alignItems: 'center',
     padding: '8px 0',
+    width: '100%',
+}));
+
+const FooterContainer = styled(Box)(() => ({
+    width: '100%',
+    maxWidth: '500px',
+    margin: '0 auto',
 }));
 
 const FooterBar: React.FC = () => {
@@ -29,17 +37,19 @@ const FooterBar: React.FC = () => {
                 borderTop: '2px solid rgba(145, 145, 145, 0.23)',
             }}
         >
-            <StyledToolbar>
-                <IconButton color="inherit">
-                    <HomeIcon fontSize="large" />
-                </IconButton>
-                <IconButton color="inherit">
-                    <NewPostIcon fontSize="large" />
-                </IconButton>
-                <IconButton color="inherit">
-                    <ProfileIcon fontSize="large" />
-                </IconButton>
-            </StyledToolbar>
+            <FooterContainer>
+                <StyledToolbar>
+                    <IconButton color="inherit">
+                        <HomeIcon fontSize="large" />
+                    </IconButton>
+                    <IconButton color="inherit">
+                        <NewPostIcon fontSize="large" />
+                    </IconButton>
+                    <IconButton color="inherit">
+                        <ProfileIcon fontSize="large" />
+                    </IconButton>
+                </StyledToolbar>
+            </FooterContainer>
         </AppBar>
     );
 };

@@ -12,18 +12,28 @@ import {
     AccountCircle as ProfileIcon,
 } from '@mui/icons-material';
 
-const StyledToolbar = styled(Toolbar)(() => ({
+const StyledToolbar = styled(Toolbar)(({ theme }) => ({
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
-    padding: '8px 0',
+    padding: theme.spacing(1), // Reduced padding
     width: '100%',
+    [theme.breakpoints.up('sm')]: {
+        padding: theme.spacing(0.5), // Smaller padding for larger screens
+    },
 }));
 
 const FooterContainer = styled(Box)(() => ({
     width: '100%',
     maxWidth: '500px',
     margin: '0 auto',
+}));
+
+const CenterIconButton = styled(IconButton)(({ theme }) => ({
+    fontSize: '2.5rem', 
+    [theme.breakpoints.up('sm')]: {
+        fontSize: '3rem', 
+    },
 }));
 
 const FooterBar: React.FC = () => {
@@ -42,9 +52,9 @@ const FooterBar: React.FC = () => {
                     <IconButton color="inherit">
                         <HomeIcon fontSize="large" />
                     </IconButton>
-                    <IconButton color="inherit">
-                        <NewPostIcon fontSize="large" />
-                    </IconButton>
+                    <CenterIconButton color="inherit">
+                        <NewPostIcon fontSize="inherit" />
+                    </CenterIconButton>
                     <IconButton color="inherit">
                         <ProfileIcon fontSize="large" />
                     </IconButton>

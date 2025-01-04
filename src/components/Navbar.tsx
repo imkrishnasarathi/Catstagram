@@ -9,10 +9,7 @@ import {
     styled,
     alpha,
 } from '@mui/material';
-import {
-    Search as SearchIcon,
-    FavoriteBorder as FavoriteBorderIcon, 
-} from '@mui/icons-material';
+import { Search as SearchIcon, FavoriteBorder as FavoriteBorderIcon } from '@mui/icons-material';
 
 const StyledToolbar = styled(Toolbar)(() => ({
     display: 'flex',
@@ -65,9 +62,40 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
+const CustomIconButton = styled(IconButton)(({ theme }) => ({
+    position: 'relative',
+    padding: theme.spacing(1),
+    '&::after': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+        borderRadius: '50%',
+        opacity: 0,
+        transition: 'opacity 0.3s, transform 0.3s',
+        transform: 'scale(0.4)',
+        pointerEvents: 'none',
+    },
+    '&:active::after': {
+        opacity: 1,
+        transform: 'scale(1)',
+    },
+}));
+
+
 const Navbar: React.FC = () => {
     return (
-        <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none', borderBottom: '2px solid rgba(145, 145, 145, .23)' }}>
+        <AppBar
+            position="static"
+            sx={{
+                backgroundColor: 'transparent',
+                boxShadow: 'none',
+                borderBottom: '2px solid rgba(145, 145, 145, .23)',
+            }}
+        >
             <StyledToolbar>
                 <Logo variant="h6" noWrap>
                     Catstagram
@@ -82,11 +110,11 @@ const Navbar: React.FC = () => {
                     />
                 </Search>
                 <div>
-                    <IconButton color="inherit">
+                    <CustomIconButton color="inherit" disableRipple>
                         <Badge badgeContent={4} color="secondary">
                             <FavoriteBorderIcon />
                         </Badge>
-                    </IconButton>
+                    </CustomIconButton>
                 </div>
             </StyledToolbar>
         </AppBar>

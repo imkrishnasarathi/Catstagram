@@ -6,9 +6,3 @@ body{
   margin: 0;
   padding: 0;
 }
-
-@media (min-width: 650px) {
-  :root {
-    background-color: #171717;
-  }
-}

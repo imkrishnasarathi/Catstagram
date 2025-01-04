@@ -1,10 +1,11 @@
 import Navbar from './Navbar';
+import FooterBar from './footerBar';
 
 function Home(){
     return(
         <>
             <Navbar/>
-            <h1>Hii</h1>
+            <FooterBar/>
         </>
     )
 }

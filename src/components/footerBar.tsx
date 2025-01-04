@@ -16,10 +16,10 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
-    padding: theme.spacing(1), // Reduced padding
+    padding: theme.spacing(1),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-        padding: theme.spacing(0.5), // Smaller padding for larger screens
+        padding: theme.spacing(0.5),
     },
 }));
 
@@ -29,10 +29,25 @@ const FooterContainer = styled(Box)(() => ({
     margin: '0 auto',
 }));
 
-const CenterIconButton = styled(IconButton)(({ theme }) => ({
-    fontSize: '2.5rem', 
-    [theme.breakpoints.up('sm')]: {
-        fontSize: '3rem', 
+const CustomIconButton = styled(IconButton)(({ theme }) => ({
+    position: 'relative',
+    overflow: 'hidden',
+    '&::after': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+        borderRadius: '50%',
+        opacity: 0,
+        transition: 'opacity 0.3s, transform 0.3s',
+        transform: 'scale(0.5)',
+    },
+    '&:active::after': {
+        opacity: 1,
+        transform: 'scale(.7)',
     },
 }));
 
@@ -49,15 +64,15 @@ const FooterBar: React.FC = () => {
         >
             <FooterContainer>
                 <StyledToolbar>
-                    <IconButton color="inherit">
+                    <CustomIconButton color="inherit" disableRipple>
                         <HomeIcon fontSize="large" />
-                    </IconButton>
-                    <CenterIconButton color="inherit">
-                        <NewPostIcon fontSize="inherit" />
-                    </CenterIconButton>
-                    <IconButton color="inherit">
+                    </CustomIconButton>
+                    <CustomIconButton color="inherit" disableRipple>
+                        <NewPostIcon fontSize="large" />
+                    </CustomIconButton>
+                    <CustomIconButton color="inherit" disableRipple>
                         <ProfileIcon fontSize="large" />
-                    </IconButton>
+                    </CustomIconButton>
                 </StyledToolbar>
             </FooterContainer>
         </AppBar>

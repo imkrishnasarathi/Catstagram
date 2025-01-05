@@ -8,7 +8,6 @@ import {
     Avatar,
     IconButton,
     Typography,
-    Grid,
     Button,
     styled,
 } from '@mui/material';
@@ -22,14 +21,13 @@ import {
 const StyledCard = styled(Card)(({ theme }) => ({
     backgroundColor: '#2c2c2c', // Dark background
     color: '#ffffff', // White text
-    margin: theme.spacing(2),
+    marginBottom: theme.spacing(3),
     borderRadius: theme.shape.borderRadius,
     boxShadow: '0 4px 10px rgba(0, 0, 0, 0.3)',
-    maxWidth: '100%',
 }));
 
 const Container = styled('div')(({ theme }) => ({
-    maxWidth: '800px', // Limit width for wide displays
+    maxWidth: '600px', // Restrict width
     margin: '0 auto',
     padding: theme.spacing(2),
 }));
@@ -59,42 +57,38 @@ const PostSection: React.FC = () => {
 
     return (
         <Container>
-            <Grid container spacing={2}>
-                {posts.map((_, index) => (
-                    <Grid item xs={12} sm={6} md={4} key={index}>
-                        <StyledCard>
-                            <CardHeader
-                                avatar={<Avatar alt="User Name" src="/static/images/avatar/1.jpg" />}
-                                title="John Doe"
-                                subheader="January 3, 2025"
-                                sx={{ color: '#ffffff' }}
-                            />
-                            <CardMedia
-                                component="img"
-                                height="140"
-                                image="https://via.placeholder.com/400x200" // Replace with actual post image
-                                alt="Post Content"
-                            />
-                            <CardContent>
-                                <Typography variant="body2" color="text.secondary" sx={{ color: '#b0b0b0' }}>
-                                    This is a sample post description. It’s an awesome day to share some cool content with the world!
-                                </Typography>
-                            </CardContent>
-                            <CardActions disableSpacing>
-                                <IconButton aria-label="like" sx={{ color: '#ffffff' }}>
-                                    <FavoriteIcon />
-                                </IconButton>
-                                <IconButton aria-label="comment" sx={{ color: '#ffffff' }}>
-                                    <CommentIcon />
-                                </IconButton>
-                                <IconButton aria-label="share" sx={{ color: '#ffffff' }}>
-                                    <ShareIcon />
-                                </IconButton>
-                            </CardActions>
-                        </StyledCard>
-                    </Grid>
-                ))}
-            </Grid>
+            {posts.map((_, index) => (
+                <StyledCard key={index}>
+                    <CardHeader
+                        avatar={<Avatar alt="User Name" src="/static/images/avatar/1.jpg" />}
+                        title="John Doe"
+                        subheader="January 3, 2025"
+                        sx={{ color: '#ffffff' }}
+                    />
+                    <CardMedia
+                        component="img"
+                        height="300"
+                        image="https://via.placeholder.com/600x400" // Replace with actual post image
+                        alt="Post Content"
+                    />
+                    <CardContent>
+                        <Typography variant="body2" color="text.secondary" sx={{ color: '#b0b0b0' }}>
+                            This is a sample post description. Sharing cool content with the world!
+                        </Typography>
+                    </CardContent>
+                    <CardActions disableSpacing>
+                        <IconButton aria-label="like" sx={{ color: '#ffffff' }}>
+                            <FavoriteIcon />
+                        </IconButton>
+                        <IconButton aria-label="comment" sx={{ color: '#ffffff' }}>
+                            <CommentIcon />
+                        </IconButton>
+                        <IconButton aria-label="share" sx={{ color: '#ffffff' }}>
+                            <ShareIcon />
+                        </IconButton>
+                    </CardActions>
+                </StyledCard>
+            ))}
             <LoadMoreButton
                 variant="outlined"
                 startIcon={<LoadMoreIcon />}

@@ -19,15 +19,15 @@ import {
 } from '@mui/icons-material';
 
 const StyledCard = styled(Card)(({ theme }) => ({
-    backgroundColor: '#2c2c2c', // Dark background
-    color: '#ffffff', // White text
+    backgroundColor: '#2c2c2c',
+    color: '#ffffff',
     marginBottom: theme.spacing(3),
     borderRadius: theme.shape.borderRadius,
     boxShadow: '0 4px 10px rgba(0, 0, 0, 0.3)',
 }));
 
 const Container = styled('div')(({ theme }) => ({
-    maxWidth: '600px', // Restrict width
+    maxWidth: '600px',
     margin: '0 auto',
     padding: theme.spacing(2),
 }));
@@ -43,16 +43,48 @@ const LoadMoreButton = styled(Button)(({ theme }) => ({
     },
 }));
 
+const wobbleAnimation = `
+  @keyframes wobble {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(0.8); }
+    75% { transform: scale(1.1); }
+  }
+`;
+
+const StyledFavoriteIcon = styled(FavoriteIcon)(({ liked }: { liked: boolean }) => ({
+    color: liked ? 'red' : '#ffffff',
+    animation: liked ? 'wobble 0.5s ease' : 'none',
+    '@global': {
+        '@keyframes wobble': {
+            '0%, 100%': { transform: 'scale(1)' },
+            '25%': { transform: 'scale(1.2)' },
+            '50%': { transform: 'scale(0.8)' },
+            '75%': { transform: 'scale(1.1)' },
+        },
+    },
+}));
+
 const PostSection: React.FC = () => {
-    const [posts, setPosts] = useState(Array(6).fill(null)); // Initial posts
+    const [posts, setPosts] = useState(Array(6).fill(null));
     const [loadingMore, setLoadingMore] = useState(false);
+    const [likedPosts, setLikedPosts] = useState<boolean[]>(Array(6).fill(false));
 
     const handleLoadMore = () => {
         setLoadingMore(true);
         setTimeout(() => {
-            setPosts((prevPosts) => [...prevPosts, ...Array(3).fill(null)]); // Load more posts
+            setPosts((prevPosts) => [...prevPosts, ...Array(3).fill(null)]);
+            setLikedPosts((prevLikes) => [...prevLikes, ...Array(3).fill(false)]);
             setLoadingMore(false);
-        }, 1000); // Simulate load delay
+        }, 1000);
+    };
+
+    const toggleLike = (index: number) => {
+        setLikedPosts((prevLikes) => {
+            const newLikes = [...prevLikes];
+            newLikes[index] = !newLikes[index];
+            return newLikes;
+        });
     };
 
     return (
@@ -68,7 +100,7 @@ const PostSection: React.FC = () => {
                     <CardMedia
                         component="img"
                         height="300"
-                        image="https://via.placeholder.com/600x400" // Replace with actual post image
+                        image="https://via.placeholder.com/600x400"
                         alt="Post Content"
                     />
                     <CardContent>
@@ -77,8 +109,8 @@ const PostSection: React.FC = () => {
                         </Typography>
                     </CardContent>
                     <CardActions disableSpacing>
-                        <IconButton aria-label="like" sx={{ color: '#ffffff' }}>
-                            <FavoriteIcon />
+                        <IconButton aria-label="like" sx={{ color: '#ffffff' }} onClick={() => toggleLike(index)}>
+                            <StyledFavoriteIcon liked={likedPosts[index]} />
                         </IconButton>
                         <IconButton aria-label="comment" sx={{ color: '#ffffff' }}>
                             <CommentIcon />

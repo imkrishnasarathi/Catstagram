@@ -24,8 +24,9 @@ function Home() {
             <Navbar />
             <ContentWrapper>
                 <PostSection />
-                <button onClick={() => setModalOpen(true)}>Create Post</button> 
-                <PostModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} /> 
+                <Modal open={isModalOpen} onClose={() => setModalOpen(false)}>
+                    <PostModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} /> 
+                </Modal>
             </ContentWrapper>
             <FooterBar />
         </PageContainer>

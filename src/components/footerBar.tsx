@@ -1,16 +1,11 @@
+// FooterBar.tsx
 import React from 'react';
-import {
-    AppBar,
-    Toolbar,
-    IconButton,
-    styled,
-    Box,
-} from '@mui/material';
-import {
-    Home as HomeIcon,
-    AddCircleOutline as NewPostIcon,
-    AccountCircle as ProfileIcon,
-} from '@mui/icons-material';
+import { AppBar, Toolbar, IconButton } from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
+import NewPostIcon from '@mui/icons-material/Add'; 
+import ProfileIcon from '@mui/icons-material/AccountCircle';
+
+import { styled, Box } from '@mui/material';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
     display: 'flex',
@@ -51,7 +46,7 @@ const CustomIconButton = styled(IconButton)(({ theme }) => ({
     },
 }));
 
-const FooterBar: React.FC = () => {
+const FooterBar: React.FC<{onAddContent: () => void}> = ({onAddContent}) => {
     return (
         <AppBar
             position="fixed"
@@ -67,7 +62,7 @@ const FooterBar: React.FC = () => {
                     <CustomIconButton color="inherit" disableRipple>
                         <HomeIcon fontSize="large" />
                     </CustomIconButton>
-                    <CustomIconButton color="inherit" disableRipple>
+                    <CustomIconButton color="inherit" disableRipple onClick={onAddContent}> 
                         <NewPostIcon fontSize="large" />
                     </CustomIconButton>
                     <CustomIconButton color="inherit" disableRipple>
@@ -80,3 +75,4 @@ const FooterBar: React.FC = () => {
 };
 
 export default FooterBar;
+

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { databases, account } from '../appwrite'; // Adjust the import path as necessary
+import { databases, account } from '../appwrite';
 
 const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
     const [imageUrl, setImageUrl] = useState('');
@@ -8,12 +8,12 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const userId = (await account.get()).$id; // Get the current user's ID
+            const userId = (await account.get()).$id;
 
             const response = await databases.createDocument(
-                'YOUR_DATABASE_ID', // Replace with your database ID
-                'YOUR_COLLECTION_ID', // Replace with your collection ID
-                'unique()', // Document ID
+                '677ea3cd002765dfe707',
+                '677fca0b0031ef813d45',
+                'unique()',
                 {
                     userId,
                     imageUrl,

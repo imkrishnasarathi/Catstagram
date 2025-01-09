@@ -6,3 +6,7 @@
     justify-content: center;
     position: fixed;
 }
+
+.modal-content{
+    background-color: rgb(71, 71, 71);
+}

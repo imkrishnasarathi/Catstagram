@@ -1,6 +1,8 @@
+import React, { useState } from 'react';
 import Navbar from './Navbar';
 import FooterBar from './footerBar';
 import PostSection from './postSection';
+import PostModal from './postModal';
 import { styled } from '@mui/material';
 
 const PageContainer = styled('div')(({ theme }) => ({
@@ -15,11 +17,15 @@ const ContentWrapper = styled('div')(({ theme }) => ({
 }));
 
 function Home() {
+    const [isModalOpen, setModalOpen] = useState(false);
+
     return (
         <PageContainer>
             <Navbar />
             <ContentWrapper>
                 <PostSection />
+                <button onClick={() => setModalOpen(true)}>Create Post</button> 
+                <PostModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} /> 
             </ContentWrapper>
             <FooterBar />
         </PageContainer>

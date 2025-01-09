@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { databases, account } from '../appwrite';
+import "./postModal.css";
 
 const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
     const [imageUrl, setImageUrl] = useState('');

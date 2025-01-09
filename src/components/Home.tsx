@@ -17,18 +17,22 @@ const ContentWrapper = styled('div')(({ theme }) => ({
 }));
 
 function Home() {
-    const [isModalOpen, setModalOpen] = useState(false);
+    const [isModalOpen, setModalOpen] = useState(false); 
+
+    const handleAddContent = () => {
+        setModalOpen(true); 
+    };
 
     return (
         <PageContainer>
             <Navbar />
             <ContentWrapper>
                 <PostSection />
-                <Modal open={isModalOpen} onClose={() => setModalOpen(false)}>
+                <Modal open={isModalOpen} onClose={() => setModalOpen(false)}> 
                     <PostModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} /> 
                 </Modal>
             </ContentWrapper>
-            <FooterBar />
+            <FooterBar onAddContent={handleAddContent} /> 
         </PageContainer>
     );
 }

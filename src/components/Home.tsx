@@ -3,7 +3,7 @@ import Navbar from './Navbar';
 import FooterBar from './footerBar';
 import PostSection from './postSection';
 import PostModal from './postModal';
-import { styled } from '@mui/material';
+import { styled, Modal } from '@mui/material';
 
 const PageContainer = styled('div')(({ theme }) => ({
     display: 'flex',

@@ -4,8 +4,10 @@ import { AppBar, Toolbar, IconButton } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import NewPostIcon from '@mui/icons-material/Add'; 
 import ProfileIcon from '@mui/icons-material/AccountCircle';
+import { useNavigate } from 'react-router-dom';
 
 import { styled, Box } from '@mui/material';
+import { Navigate } from 'react-router-dom';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
     display: 'flex',
@@ -47,6 +49,7 @@ const CustomIconButton = styled(IconButton)(({ theme }) => ({
 }));
 
 const FooterBar: React.FC<{onAddContent: () => void}> = ({onAddContent}) => {
+    const navigate = useNavigate();
     return (
         <AppBar
             position="fixed"
@@ -65,7 +68,7 @@ const FooterBar: React.FC<{onAddContent: () => void}> = ({onAddContent}) => {
                     <CustomIconButton color="inherit" disableRipple onClick={onAddContent}> 
                         <NewPostIcon fontSize="large" />
                     </CustomIconButton>
-                    <CustomIconButton color="inherit" disableRipple>
+                    <CustomIconButton color="inherit" disableRipple onClick={()=> navigate('/login')}>
                         <ProfileIcon fontSize="large" />
                     </CustomIconButton>
                 </StyledToolbar>

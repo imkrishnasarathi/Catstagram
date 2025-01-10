@@ -23,7 +23,7 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                 }
             );
             console.log('Post created:', response);
-            onClose(); // Close the modal after submission
+            onClose(); 
         } catch (error) {
             console.error('Error creating post:', error);
             alert('Failed to create post. Please try again.');

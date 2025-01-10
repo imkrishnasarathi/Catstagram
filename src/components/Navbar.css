@@ -1,5 +1,5 @@
 .navbar {
-    background-color: transparent;
+    background-color: transparent !important;
     box-shadow: none;
     border-bottom: 2px solid rgba(145, 145, 145, 0.23);
 }
@@ -17,13 +17,22 @@
 }
 
 .navbar-search {
+    width: 100%;
+    height: 46px; 
+    color: white;
+    line-height: 36px;
+    display: flex;
+    align-items: center;
     position: relative;
     border-radius: 4px;
     background-color: rgba(255, 255, 255, 0.12);
     margin-right: 16px;
-    margin-left: 0;
-    opacity: 0.5;
-    width: 100%;
+    margin-left: 0px !important;
+}
+
+.navbar-search .MuiInputBase-input{
+    color: white;
+    margin: 0;
 }
 
 @media (min-width: 600px) {

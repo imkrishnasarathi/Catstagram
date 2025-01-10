@@ -1,5 +1,6 @@
 import { useState } from "react";
-import {account } from "../appwrite";
+import { account } from "../appwrite";
+import "./Login.css"
 
 function Login(){
     const [email, setEmail] = useState('');

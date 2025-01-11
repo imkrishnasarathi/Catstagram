@@ -13,7 +13,7 @@ const PageContainer = styled('div')(({ theme }) => ({
 
 const ContentWrapper = styled('div')(({ theme }) => ({
     flex: 1, 
-    paddingBottom: theme.spacing(8), 
+    paddingBottom: theme.spacing(8),
 }));
 
 function Home() {

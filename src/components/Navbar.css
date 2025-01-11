@@ -1,6 +1,8 @@
 .navbar {
     background-color: transparent !important;
     box-shadow: none;
+    position: fixed;
+    top: 0;
     border-bottom: 2px solid rgba(145, 145, 145, 0.23);
 }
 

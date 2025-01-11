@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from './Navbar';
 import FooterBar from './footerBar';
 import PostSection from './postSection';
-import PostModal from './postModal';
+import PostModal from './postModal.tsx';
 import { styled, Modal } from '@mui/material';
 
 const PageContainer = styled('div')(({ theme }) => ({

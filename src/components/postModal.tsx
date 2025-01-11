@@ -5,11 +5,25 @@ import "./postModal.css";
 const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
     const [imageUrl, setImageUrl] = useState('');
     const [caption, setCaption] = useState('');
+    const [aiPrompt, setAiPrompt] = useState('');
+    const [uploadFile, setUploadFile] = useState<File | null>(null);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
         try {
             const userId = (await account.get()).$id;
+
+            let finalImageUrl = imageUrl;
+
+            if (aiPrompt) {
+                // Replace this with your AI image generation logic
+                finalImageUrl = `https://dummy-ai-image.com?prompt=${encodeURIComponent(aiPrompt)}`;
+            } else if (uploadFile) {
+                // Handle file upload logic and obtain its URL
+                const uploadUrl = await uploadImage(uploadFile);
+                finalImageUrl = uploadUrl;
+            }
 
             const response = await databases.createDocument(
                 '677ea3cd002765dfe707',
@@ -17,11 +31,12 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                 'unique()',
                 {
                     userId,
-                    imageUrl,
+                    imageUrl: finalImageUrl,
                     caption,
                     createdAt: new Date().toISOString(),
                 }
             );
+
             console.log('Post created:', response);
             onClose(); 
         } catch (error) {
@@ -30,23 +45,18 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
         }
     };
 
+    const uploadImage = async (file: File) => {
+        // Simulate file upload logic
+        return `https://cdn.example.com/uploads/${file.name}`;
+    };
+
     if (!isOpen) return null;
 
     return (
-        <div className="modal">
+        <div id="postModal" className="modal">
             <div className="modal-content">
                 <h2>Create a New Post</h2>
                 <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="imageUrl">Image URL:</label>
-                        <input
-                            type="text"
-                            id="imageUrl"
-                            value={imageUrl}
-                            onChange={(e) => setImageUrl(e.target.value)}
-                            required
-                        />
-                    </div>
                     <div>
                         <label htmlFor="caption">Caption:</label>
                         <textarea
@@ -56,6 +66,49 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                             required
                         />
                     </div>
+                    <div className="image-options">
+                        <button type="button" onClick={() => setImageUrl('')}>
+                            Use AI Image
+                        </button>
+                        <button type="button" onClick={() => setAiPrompt('')}>
+                            Upload Image
+                        </button>
+                    </div>
+                    {imageUrl && (
+                        <div>
+                            <label htmlFor="imageUrl">Image URL:</label>
+                            <input
+                                type="text"
+                                id="imageUrl"
+                                value={imageUrl}
+                                onChange={(e) => setImageUrl(e.target.value)}
+                                required
+                            />
+                        </div>
+                    )}
+                    {aiPrompt && (
+                        <div>
+                            <label htmlFor="aiPrompt">AI Image Prompt:</label>
+                            <input
+                                type="text"
+                                id="aiPrompt"
+                                value={aiPrompt}
+                                onChange={(e) => setAiPrompt(e.target.value)}
+                                required
+                            />
+                        </div>
+                    )}
+                    {uploadFile && (
+                        <div className="upload-section">
+                            <label htmlFor="uploadFile">Upload an Image:</label>
+                            <input
+                                type="file"
+                                id="uploadFile"
+                                onChange={(e) => setUploadFile(e.target.files?.[0] || null)}
+                                required
+                            />
+                        </div>
+                    )}
                     <button type="submit">Submit Post</button>
                     <button type="button" onClick={onClose}>Cancel</button>
                 </form>

@@ -1,50 +1,119 @@
-.modal{
+/* Modal container */
+#postModal .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
+    justify-content: center; /* Horizontally centers the modal */
+    align-items: center; /* Vertically centers the modal */
+    z-index: 1000; /* Ensures the modal stays on top */
 }
 
-.modal-content{
+/* Modal content */
+#postModal .modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px; /* Adjust the width of the modal */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Ensures form and title are stacked */
+    gap: 20px;
+    max-width: 90%; /* Prevents overflow on smaller screens */
+}
+
+/* Modal title */
+#postModal .modal-content h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+    text-align: center;
+    color: #333;
+    margin-bottom: 0;
+}
+
+/* Form inside modal */
+#postModal .modal-content form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: rgba(71, 71, 71, 0.843);
-    width: 50%;
-    height: 50%;
-    padding: 2em;
-    border-radius: 10px;
+    gap: 15px;
+}
+
+/* Label styling */
+#postModal label {
+    font-weight: bold;
+    color: #555;
+}
+
+/* Input and textarea styling */
+#postModal input[type="text"],
+#postModal textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+#postModal textarea {
+    resize: none;
+    height: 100px;
+}
+
+/* Buttons styling */
+#postModal button {
+    padding: 10px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#postModal button[type="submit"] {
+    background: #4CAF50;
     color: white;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
-.modal-content h2{
-    text-align: center;
-    margin-bottom: 1em;
-    font-size: 3em;
-    letter-spacing: 2px;
+#postModal button[type="button"] {
+    background: #f44336;
+    color: white;
 }
 
-input[type="text"]{
-    width: 55%;
-    padding: 0.5em;
-    margin-bottom: 1em;
-    border-radius: 5px;
-    margin-left: 1em;
-    border: none;
+#postModal button:hover {
+    opacity: 0.9;
 }
 
-form div{
+/* AI and upload options styling */
+#postModal .image-options {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    gap: 10px;
 }
 
-textarea{
-    margin-left: 3em;
-    padding: 0.5em;
-    border-radius: 5px;
+#postModal .image-options button {
+    flex: 1;
+    padding: 10px;
+    background: #007BFF;
+    color: white;
     border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#postModal .image-options button:hover {
+    opacity: 0.9;
+}
+
+/* Upload section styling */
+#postModal .upload-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#postModal .upload-section input[type="file"] {
+    padding: 5px;
 }

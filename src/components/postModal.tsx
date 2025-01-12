@@ -17,16 +17,15 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
 
             if (useAIImage && aiPrompt) {
                 const aiGeneratedContent = new Blob([`Generated from prompt: ${aiPrompt}`], { type: 'text/plain' });
-                
+
                 const aiGeneratedFile = new File([aiGeneratedContent], 'ai-generated-image.txt', { type: 'text/plain' });
-                
 
                 const response = await storage.createFile(
                     '6783c0c200272f9370bf',
                     'unique()',
                     aiGeneratedFile
                 );
-            
+
                 finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/YOUR_BUCKET_ID/files/${response.$id}/view?project=YOUR_PROJECT_ID&mode=admin`;
             } else if (uploadFile) {
                 const uploadedFile = await storage.createFile(
@@ -65,68 +64,66 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
 
     return (
         <div id="postModal" className="modal">
-            <div className="modal-content">
-                <h2>Create a New Post</h2>
-                <form onSubmit={handleSubmit}>
+            <h2>Create a New Post</h2>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="caption">Caption:</label>
+                    <textarea
+                        id="caption"
+                        value={caption}
+                        onChange={(e) => setCaption(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="image-options">
+                    <button
+                        type="button"
+                        onClick={() => {
+                            setUseAIImage(true);
+                            setAiPrompt('');
+                            setUploadFile(null);
+                        }}
+                    >
+                        Use AI Image
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => {
+                            setUseAIImage(false);
+                            setAiPrompt('');
+                            setUploadFile(null);
+                        }}
+                    >
+                        Upload Image
+                    </button>
+                </div>
+                {useAIImage ? (
                     <div>
-                        <label htmlFor="caption">Caption:</label>
-                        <textarea
-                            id="caption"
-                            value={caption}
-                            onChange={(e) => setCaption(e.target.value)}
+                        <label htmlFor="aiPrompt">AI Image Prompt:</label>
+                        <input
+                            type="text"
+                            id="aiPrompt"
+                            value={aiPrompt}
+                            onChange={(e) => setAiPrompt(e.target.value)}
                             required
                         />
                     </div>
-                    <div className="image-options">
-                        <button
-                            type="button"
-                            onClick={() => {
-                                setUseAIImage(true);
-                                setAiPrompt('');
-                                setUploadFile(null);
-                            }}
-                        >
-                            Use AI Image
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() => {
-                                setUseAIImage(false);
-                                setAiPrompt('');
-                                setUploadFile(null);
-                            }}
-                        >
-                            Upload Image
-                        </button>
+                ) : (
+                    <div className="upload-section">
+                        <label htmlFor="uploadFile">Upload an Image:</label>
+                        <input
+                            type="file"
+                            id="uploadFile"
+                            onChange={(e) => setUploadFile(e.target.files?.[0] || null)}
+                            required
+                        />
                     </div>
-                    {useAIImage ? (
-                        <div>
-                            <label htmlFor="aiPrompt">AI Image Prompt:</label>
-                            <input
-                                type="text"
-                                id="aiPrompt"
-                                value={aiPrompt}
-                                onChange={(e) => setAiPrompt(e.target.value)}
-                                required
-                            />
-                        </div>
-                    ) : (
-                        <div className="upload-section">
-                            <label htmlFor="uploadFile">Upload an Image:</label>
-                            <input
-                                type="file"
-                                id="uploadFile"
-                                onChange={(e) => setUploadFile(e.target.files?.[0] || null)}
-                                required
-                            />
-                        </div>
-                    )}
-                    <button type="submit">Submit Post</button>
-                    <button type="button" onClick={onClose}>
-                        Cancel
-                    </button>
-                </form>
-            </div>
+                )}
+                <button type="submit">Submit Post</button>
+                <button type="button" onClick={onClose}>
+                    Cancel
+                </button>
+            </form>
         </div>
     );
 };

@@ -1,27 +1,37 @@
-import { useState } from "react";
-import { account } from "../appwrite";
-import "./Login.css"
+import React, { useState } from 'react';
+import { account } from '../appwrite.ts';
 
-function Login(){
+const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
+        console.log(email, password);
+
         try {
-            await account.createSession(email, password);
-            alert('Logged in successfully');
+            const session = await account.createEmailPasswordSession(email, password); 
+            console.log('Session created successfully:', session);
         } catch (error) {
-            alert('Failed to login');
+            console.error('Login failed:', error);
         }
-    }
+    };
 
     return (
-        <form onSubmit={handleSubmit} id="LoginForm">
-            <label htmlFor="email">Email:</label>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required/>
-            <label htmlFor="password">Password:</label>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required/>
+        <form onSubmit={handleLogin}>
+            <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder="Enter your Email Address"
+            />
+            <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                placeholder="Enter your password"
+            />
             <button type="submit">Login</button>
         </form>
     );

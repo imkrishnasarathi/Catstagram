@@ -8,7 +8,6 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
     const [caption, setCaption] = useState('');
     const [aiPrompt, setAiPrompt] = useState('');
     const [uploadFile, setUploadFile] = useState<File | null>(null);
-    const storage = new Storage(client);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

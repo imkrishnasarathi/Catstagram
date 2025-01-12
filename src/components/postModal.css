@@ -22,6 +22,7 @@
     flex-direction: column;
     gap: 20px;
     max-width: 90%;
+    margin: 0 auto;
 }
 
 #postModal .modal-content h2 {
@@ -31,6 +32,7 @@
     color: #333;
     margin-bottom: 0;
 }
+
 
 #postModal .modal-content form {
     display: flex;

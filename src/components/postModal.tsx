@@ -17,10 +17,8 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
             let finalImageUrl = imageUrl;
 
             if (aiPrompt) {
-                // Replace this with your AI image generation logic
                 finalImageUrl = `https://dummy-ai-image.com?prompt=${encodeURIComponent(aiPrompt)}`;
             } else if (uploadFile) {
-                // Handle file upload logic and obtain its URL
                 const uploadUrl = await uploadImage(uploadFile);
                 finalImageUrl = uploadUrl;
             }
@@ -46,7 +44,6 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
     };
 
     const uploadImage = async (file: File) => {
-        // Simulate file upload logic
         return `https://cdn.example.com/uploads/${file.name}`;
     };
 

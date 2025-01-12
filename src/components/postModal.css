@@ -1,32 +1,29 @@
-/* Modal container */
 #postModal .modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
-    justify-content: center; /* Horizontally centers the modal */
-    align-items: center; /* Vertically centers the modal */
-    z-index: 1000; /* Ensures the modal stays on top */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
-/* Modal content */
 #postModal .modal-content {
     background: #fff;
     padding: 20px;
     border-radius: 10px;
-    width: 400px; /* Adjust the width of the modal */
+    width: 400px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     position: relative;
     display: flex;
-    flex-direction: column; /* Ensures form and title are stacked */
+    flex-direction: column;
     gap: 20px;
-    max-width: 90%; /* Prevents overflow on smaller screens */
+    max-width: 90%;
 }
 
-/* Modal title */
 #postModal .modal-content h2 {
     margin-top: 0;
     font-size: 1.5em;
@@ -35,20 +32,17 @@
     margin-bottom: 0;
 }
 
-/* Form inside modal */
 #postModal .modal-content form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-/* Label styling */
 #postModal label {
     font-weight: bold;
     color: #555;
 }
 
-/* Input and textarea styling */
 #postModal input[type="text"],
 #postModal textarea {
     width: 100%;
@@ -63,7 +57,6 @@
     height: 100px;
 }
 
-/* Buttons styling */
 #postModal button {
     padding: 10px;
     font-size: 1em;
@@ -86,7 +79,6 @@
     opacity: 0.9;
 }
 
-/* AI and upload options styling */
 #postModal .image-options {
     display: flex;
     justify-content: space-between;
@@ -107,7 +99,6 @@
     opacity: 0.9;
 }
 
-/* Upload section styling */
 #postModal .upload-section {
     display: flex;
     flex-direction: column;

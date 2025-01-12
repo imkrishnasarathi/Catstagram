@@ -1,4 +1,3 @@
-// src/components/postModal.tsx
 import React, { useState } from 'react';
 import { databases, account, storage } from '../appwrite';
 import "./postModal.css";
@@ -18,22 +17,19 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
             let finalImageUrl = imageUrl;
 
             if (aiPrompt) {
-                // Replace with your actual AI image generation logic
                 finalImageUrl = `https://dummy-ai-image.com?prompt=${encodeURIComponent(aiPrompt)}`; 
             } else if (uploadFile) {
-                // Upload to Appwrite Storage
                 const uploadedFile = await storage.createFile(
-                    'YOUR_BUCKET_ID', // Replace with your bucket ID
-                    'unique()', // Unique file ID
+                    'YOUR_BUCKET_ID',
+                    'unique()',
                     uploadFile
                 );
-                // Construct the image URL from Appwrite Storage
                 finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/YOUR_BUCKET_ID/files/${uploadedFile.$id}/view?project=YOUR_PROJECT_ID&mode=admin`;
             }
 
             const response = await databases.createDocument(
-                '677ea3cd002765dfe707', // Replace with your Database ID
-                '677fca0b0031ef813d45', // Replace with your Collection ID
+                '677ea3cd002765dfe707',
+                '677fca0b0031ef813d45',
                 'unique()', 
                 {
                     userId,

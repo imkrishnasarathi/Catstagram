@@ -23,7 +23,7 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                 
 
                 const response = await storage.createFile(
-                    'YOUR_BUCKET_ID',
+                    '6783c0c200272f9370bf',
                     'unique()',
                     aiGeneratedFile
                 );
@@ -31,7 +31,7 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                 finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/YOUR_BUCKET_ID/files/${response.$id}/view?project=YOUR_PROJECT_ID&mode=admin`;
             } else if (uploadFile) {
                 const uploadedFile = await storage.createFile(
-                    'YOUR_BUCKET_ID',
+                    '6783c0c200272f9370bf',
                     'unique()',
                     uploadFile
                 );
@@ -43,8 +43,8 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
             }
 
             await databases.createDocument(
-                'YOUR_DATABASE_ID',
-                'YOUR_COLLECTION_ID',
+                '677ea3cd002765dfe707',
+                '677fca0b0031ef813d45',
                 'unique()',
                 {
                     userId,

@@ -17,7 +17,7 @@ function Login(){
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} id="LoginForm">
             <label htmlFor="email">Email:</label>
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required/>
             <label htmlFor="password">Password:</label>

@@ -1,4 +1,3 @@
-// src/components/PostModal.tsx
 import React, { useState } from 'react';
 import { databases, account, storage } from '../appwrite';
 import './postModal.css';

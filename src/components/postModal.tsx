@@ -15,35 +15,47 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
             const userId = (await account.get()).$id;
             let finalImageUrl = '';
 
-            if (useAIImage && aiPrompt) {
-                const aiGeneratedContent = new Blob([`Generated from prompt: ${aiPrompt}`], { type: 'text/plain' });
+            // Check if the prompt contains 'cat' or any related word
+            const validPrompt = /cat|kitten|feline/i.test(aiPrompt);
+            if (useAIImage && aiPrompt && validPrompt) {
+                const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(aiPrompt)}`;
 
-                const aiGeneratedFile = new File([aiGeneratedContent], 'ai-generated-image.txt', { type: 'text/plain' });
+                // Fetch the image from the Pollinations API
+                const response = await fetch(imageUrl);
+                if (response.ok) {
+                    const imageBlob = await response.blob();
+                    const imageFile = new File([imageBlob], 'ai-generated-image.jpg', { type: 'image/jpeg' });
 
-                const response = await storage.createFile(
-                    '6783c0c200272f9370bf',
-                    'unique()',
-                    aiGeneratedFile
-                );
+                    // Upload the generated image to Appwrite storage
+                    const uploadedFile = await storage.createFile(
+                        '6783c0c200272f9370bf', // Bucket ID
+                        'unique()', // Unique file ID
+                        imageFile
+                    );
 
-                finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/6783c0c200272f9370bf/files/${response.$id}/view?project=YOUR_PROJECT_ID&mode=admin`;
+                    finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/6783c0c200272f9370bf/files/${uploadedFile.$id}/view?project=YOUR_PROJECT_ID&mode=admin`;
+                } else {
+                    alert('Failed to generate image. Please try again.');
+                    return;
+                }
             } else if (uploadFile) {
                 const uploadedFile = await storage.createFile(
-                    '6783c0c200272f9370bf',
-                    'unique()',
+                    '6783c0c200272f9370bf', // Bucket ID
+                    'unique()', // Unique file ID
                     uploadFile
                 );
 
                 finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/6783c0c200272f9370bf/files/${uploadedFile.$id}/view?project=YOUR_PROJECT_ID&mode=admin`;
             } else {
-                alert('Please provide either an AI prompt or an image to upload.');
+                alert('Please provide a valid AI prompt or upload an image.');
                 return;
             }
 
+            // Create a document in the database
             await databases.createDocument(
-                '677ea3cd002765dfe707',
-                '677fca0b0031ef813d45',
-                'unique()',
+                '677ea3cd002765dfe707', // Collection ID
+                '677fca0b0031ef813d45', // Another ID (may represent a database structure)
+                'unique()', // Unique document ID
                 {
                     userId,
                     imageUrl: finalImageUrl,
@@ -97,6 +109,7 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                             onChange={(e) => setAiPrompt(e.target.value)}
                             required
                         />
+                        <p>Ensure your prompt contains words like "cat" or related terms.</p>
                     </div>
                 ) : (
                     <div className="upload-section">

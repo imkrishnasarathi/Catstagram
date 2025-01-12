@@ -26,7 +26,7 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                     aiGeneratedFile
                 );
 
-                finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/YOUR_BUCKET_ID/files/${response.$id}/view?project=YOUR_PROJECT_ID&mode=admin`;
+                finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/6783c0c200272f9370bf/files/${response.$id}/view?project=YOUR_PROJECT_ID&mode=admin`;
             } else if (uploadFile) {
                 const uploadedFile = await storage.createFile(
                     '6783c0c200272f9370bf',
@@ -34,7 +34,7 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                     uploadFile
                 );
 
-                finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/YOUR_BUCKET_ID/files/${uploadedFile.$id}/view?project=YOUR_PROJECT_ID&mode=admin`;
+                finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/6783c0c200272f9370bf/files/${uploadedFile.$id}/view?project=YOUR_PROJECT_ID&mode=admin`;
             } else {
                 alert('Please provide either an AI prompt or an image to upload.');
                 return;
@@ -67,7 +67,7 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
             <h2>Create a New Post</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="caption">Caption:</label>
+                    <label htmlFor="caption">Post Caption:</label>
                     <textarea
                         id="caption"
                         value={caption}
@@ -85,16 +85,6 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                         }}
                     >
                         Use AI Image
-                    </button>
-                    <button
-                        type="button"
-                        onClick={() => {
-                            setUseAIImage(false);
-                            setAiPrompt('');
-                            setUploadFile(null);
-                        }}
-                    >
-                        Upload Image
                     </button>
                 </div>
                 {useAIImage ? (

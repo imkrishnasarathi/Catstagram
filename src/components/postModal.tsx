@@ -1,36 +1,51 @@
+// src/components/PostModal.tsx
 import React, { useState } from 'react';
 import { databases, account, storage } from '../appwrite';
-import "./postModal.css";
+import './postModal.css';
 
 const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
-    const [imageUrl, setImageUrl] = useState('');
     const [caption, setCaption] = useState('');
     const [aiPrompt, setAiPrompt] = useState('');
     const [uploadFile, setUploadFile] = useState<File | null>(null);
+    const [useAIImage, setUseAIImage] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         try {
             const userId = (await account.get()).$id;
+            let finalImageUrl = '';
 
-            let finalImageUrl = imageUrl;
+            if (useAIImage && aiPrompt) {
+                const aiGeneratedContent = new Blob([`Generated from prompt: ${aiPrompt}`], { type: 'text/plain' });
+                
+                const aiGeneratedFile = new File([aiGeneratedContent], 'ai-generated-image.txt', { type: 'text/plain' });
+                
 
-            if (aiPrompt) {
-                finalImageUrl = `https://dummy-ai-image.com?prompt=${encodeURIComponent(aiPrompt)}`; 
+                const response = await storage.createFile(
+                    'YOUR_BUCKET_ID',
+                    'unique()',
+                    aiGeneratedFile
+                );
+            
+                finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/YOUR_BUCKET_ID/files/${response.$id}/view?project=YOUR_PROJECT_ID&mode=admin`;
             } else if (uploadFile) {
                 const uploadedFile = await storage.createFile(
                     'YOUR_BUCKET_ID',
                     'unique()',
                     uploadFile
                 );
+
                 finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/YOUR_BUCKET_ID/files/${uploadedFile.$id}/view?project=YOUR_PROJECT_ID&mode=admin`;
+            } else {
+                alert('Please provide either an AI prompt or an image to upload.');
+                return;
             }
 
-            const response = await databases.createDocument(
-                '677ea3cd002765dfe707',
-                '677fca0b0031ef813d45',
-                'unique()', 
+            await databases.createDocument(
+                'YOUR_DATABASE_ID',
+                'YOUR_COLLECTION_ID',
+                'unique()',
                 {
                     userId,
                     imageUrl: finalImageUrl,
@@ -39,8 +54,8 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                 }
             );
 
-            console.log('Post created:', response);
-            onClose(); 
+            alert('Post created successfully!');
+            onClose();
         } catch (error) {
             console.error('Error creating post:', error);
             alert('Failed to create post. Please try again.');
@@ -64,26 +79,28 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                         />
                     </div>
                     <div className="image-options">
-                        <button type="button" onClick={() => { setImageUrl(''); setAiPrompt(''); setUploadFile(null); }}>
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setUseAIImage(true);
+                                setAiPrompt('');
+                                setUploadFile(null);
+                            }}
+                        >
                             Use AI Image
                         </button>
-                        <button type="button" onClick={() => { setAiPrompt(''); setImageUrl(''); setUploadFile(null); }}>
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setUseAIImage(false);
+                                setAiPrompt('');
+                                setUploadFile(null);
+                            }}
+                        >
                             Upload Image
                         </button>
                     </div>
-                    {imageUrl && (
-                        <div>
-                            <label htmlFor="imageUrl">Image URL:</label>
-                            <input
-                                type="text"
-                                id="imageUrl"
-                                value={imageUrl}
-                                onChange={(e) => setImageUrl(e.target.value)}
-                                required
-                            />
-                        </div>
-                    )}
-                    {aiPrompt && (
+                    {useAIImage ? (
                         <div>
                             <label htmlFor="aiPrompt">AI Image Prompt:</label>
                             <input
@@ -94,8 +111,7 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                                 required
                             />
                         </div>
-                    )}
-                    {uploadFile && (
+                    ) : (
                         <div className="upload-section">
                             <label htmlFor="uploadFile">Upload an Image:</label>
                             <input
@@ -107,7 +123,9 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                         </div>
                     )}
                     <button type="submit">Submit Post</button>
-                    <button type="button" onClick={onClose}>Cancel</button>
+                    <button type="button" onClick={onClose}>
+                        Cancel
+                    </button>
                 </form>
             </div>
         </div>

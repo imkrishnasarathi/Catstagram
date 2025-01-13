@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { databases, account, storage } from '../appwrite';
+import { Permission, Role } from 'appwrite';
 import './postModal.css';
 
 const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
@@ -8,19 +9,24 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
     const [uploadFile, setUploadFile] = useState<File | null>(null);
     const [useAIImage, setUseAIImage] = useState(false);
 
+    
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
+        
         try {
             const userId = (await account.get()).$id;
             let finalImageUrl = '';
 
-            // Check if the prompt contains 'cat' or any related word
+            const permissions = [
+                Permission.read(Role.users()), // All users can read
+                Permission.update(Role.user(userId)), // Only the owner can update
+                Permission.delete(Role.user(userId)), // Only the owner can delete
+            ];
+            
             const validPrompt = /cat|kitten|feline/i.test(aiPrompt);
             if (useAIImage && aiPrompt && validPrompt) {
                 const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(aiPrompt)}`;
-
-                // Fetch the image from the Pollinations API
+                
                 const response = await fetch(imageUrl);
                 if (response.ok) {
                     const imageBlob = await response.blob();
@@ -29,7 +35,8 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                     const uploadedFile = await storage.createFile(
                         '6783c0c200272f9370bf',
                         'unique()',
-                        imageFile
+                        imageFile,
+                        permissions
                     );
 
                     finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/6783c0c200272f9370bf/files/${uploadedFile.$id}/view?project=6774db4f0019e0f9e984&mode=admin`;
@@ -41,7 +48,8 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                 const uploadedFile = await storage.createFile(
                     '6783c0c200272f9370bf', // Bucket ID
                     'unique()', // Unique file ID
-                    uploadFile
+                    uploadFile,
+                    permissions
                 );
 
                 finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/6783c0c200272f9370bf/files/${uploadedFile.$id}/view?project=6774db4f0019e0f9e984&mode=admin`;
@@ -50,17 +58,17 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                 return;
             }
 
-            // Create a document in the database
             await databases.createDocument(
-                '677ea3cd002765dfe707', // Collection ID
-                '677fca0b0031ef813d45', // Another ID (may represent a database structure)
-                'unique()', // Unique document ID
+                '677ea3cd002765dfe707', 
+                '677fca0b0031ef813d45',
+                'unique()', 
                 {
                     userId,
                     imageUrl: finalImageUrl,
                     caption,
                     createdAt: new Date().toISOString(),
-                }
+                },
+                permissions
             );
 
             alert('Post created successfully!');

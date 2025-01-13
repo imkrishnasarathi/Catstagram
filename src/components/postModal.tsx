@@ -19,8 +19,9 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
 
             const permissions = [
                 Permission.read(Role.users()), // All users can read
-                Permission.update(Role.user(userId)), // Only the owner can update
-                Permission.delete(Role.user(userId)), // Only the owner can delete
+                Permission.write(Role.users()), // Only the owner can write
+                Permission.update(Role.users()), // Only the owner can update
+                Permission.delete(Role.users()), // Only the owner can delete
             ];
             
             const validPrompt = /cat|kitten|feline/i.test(aiPrompt);
@@ -58,18 +59,19 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                 return;
             }
 
-            await databases.createDocument(
-                '677ea3cd002765dfe707', 
-                '677fca0b0031ef813d45',
-                'unique()', 
-                {
-                    userId,
-                    imageUrl: finalImageUrl,
-                    caption,
-                    createdAt: new Date().toISOString(),
-                },
-                permissions
-            );
+            // await databases.createDocument(
+            //     '677ea3cd002765dfe707', 
+            //     '677fca0b0031ef813d45',
+            //     'unique()', 
+            //     {},
+            //     // {
+            //     //     // userId: userId,
+            //     //     imageUrl: finalImageUrl,
+            //     //     caption,
+            //     //     createdAt: new Date().toISOString(),
+            //     // },
+            //     permissions
+            // );
 
             alert('Post created successfully!');
             onClose();

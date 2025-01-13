@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { account } from '../appwrite.ts';
+import { account, client } from '../appwrite.ts';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -11,6 +11,7 @@ const Login: React.FC = () => {
 
         try {
             const session = await account.createEmailPasswordSession(email, password); 
+            client.setJWT(session.$id);
             console.log('Session created successfully:', session);
         } catch (error) {
             console.error('Login failed:', error);

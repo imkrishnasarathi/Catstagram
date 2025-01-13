@@ -16,13 +16,6 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
         try {
             const userId = (await account.get()).$id;
             let finalImageUrl = '';
-
-            const permissions = [
-                Permission.read(Role.users()), // All users can read
-                Permission.write(Role.users()), // Only the owner can write
-                Permission.update(Role.users()), // Only the owner can update
-                Permission.delete(Role.users()), // Only the owner can delete
-            ];
             
             const validPrompt = /cat|kitten|feline/i.test(aiPrompt);
             if (useAIImage && aiPrompt && validPrompt) {
@@ -37,7 +30,6 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                         '6783c0c200272f9370bf',
                         'unique()',
                         imageFile,
-                        permissions
                     );
 
                     finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/6783c0c200272f9370bf/files/${uploadedFile.$id}/view?project=6774db4f0019e0f9e984&mode=admin`;
@@ -50,7 +42,6 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                     '6783c0c200272f9370bf', // Bucket ID
                     'unique()', // Unique file ID
                     uploadFile,
-                    permissions
                 );
 
                 finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/6783c0c200272f9370bf/files/${uploadedFile.$id}/view?project=6774db4f0019e0f9e984&mode=admin`;

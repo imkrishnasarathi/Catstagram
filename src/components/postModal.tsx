@@ -26,14 +26,13 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                     const imageBlob = await response.blob();
                     const imageFile = new File([imageBlob], 'ai-generated-image.jpg', { type: 'image/jpeg' });
 
-                    // Upload the generated image to Appwrite storage
                     const uploadedFile = await storage.createFile(
-                        '6783c0c200272f9370bf', // Bucket ID
-                        'unique()', // Unique file ID
+                        '6783c0c200272f9370bf',
+                        'unique()',
                         imageFile
                     );
 
-                    finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/6783c0c200272f9370bf/files/${uploadedFile.$id}/view?project=YOUR_PROJECT_ID&mode=admin`;
+                    finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/6783c0c200272f9370bf/files/${uploadedFile.$id}/view?project=6774db4f0019e0f9e984&mode=admin`;
                 } else {
                     alert('Failed to generate image. Please try again.');
                     return;
@@ -45,7 +44,7 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                     uploadFile
                 );
 
-                finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/6783c0c200272f9370bf/files/${uploadedFile.$id}/view?project=YOUR_PROJECT_ID&mode=admin`;
+                finalImageUrl = `https://cloud.appwrite.io/v1/storage/buckets/6783c0c200272f9370bf/files/${uploadedFile.$id}/view?project=6774db4f0019e0f9e984&mode=admin`;
             } else {
                 alert('Please provide a valid AI prompt or upload an image.');
                 return;

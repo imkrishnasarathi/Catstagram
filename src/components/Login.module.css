@@ -9,6 +9,7 @@ body{
 form{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     background-color: rgba(71, 71, 71, 0.843);
     width: 60vw;
@@ -20,5 +21,14 @@ form{
 }
 
 input{
-    
+    height: 3em;
+    width: 25em;
+    margin: 0.5em;
+    border-radius: 4px;
+    border: none;
+}
+
+input:focus{
+    outline: solid 2px rgb(57, 128, 204);
+    outline-offset: 1.2px;
 }

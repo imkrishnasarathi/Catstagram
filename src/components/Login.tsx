@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { account, client } from '../appwrite.ts';
-import './Login.module.css';
+import styles from './Login.module.css';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -20,22 +20,30 @@ const Login: React.FC = () => {
     };
 
     return (
-        <form onSubmit={handleLogin}>
-            <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                placeholder="Enter your Email Address"
-            />
-            <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                placeholder="Enter your password"
-            />
-            <button type="submit">Login</button>
-        </form>
+        <div className={styles.body}>
+            <form className={styles.form} onSubmit={handleLogin}>
+                <h1>Login to an existing account</h1>
+                <input
+                    className={styles.input}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    placeholder="Enter your Email Address"
+                />
+                <input
+                    className={styles.input}
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    placeholder="Enter your password"
+                />
+                <div>
+                    <button className={styles.button} type="submit">Login</button>
+                    <a href="/signup">Don't Have an Account?</a>
+                </div>
+            </form>
+        </div>
     );
 };
 

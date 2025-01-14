@@ -36,7 +36,7 @@
 }
 
 .button {
-    width: 25em;
+    width: 18.5em;
     height: 3em;
     background-color: rgb(57, 128, 204);
     color: white;
@@ -47,4 +47,20 @@
 
 .button:hover {
     background-color: rgba(57, 128, 204, 0.8);
+}
+
+div.button-container {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+}
+
+div.button-container a{
+    text-decoration: none;
+    color: white;
+    background-color: rgb(6, 73, 124);
+    box-sizing: border-box;
+    padding: 0.5em;
+    border-radius: 4px;
+    border: 2px solid white;
 }

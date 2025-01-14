@@ -38,7 +38,7 @@ const Login: React.FC = () => {
                     required
                     placeholder="Enter your password"
                 />
-                <div>
+                <div className={styles['button-container']}>
                     <button className={styles.button} type="submit">Login</button>
                     <a href="/signup">Don't Have an Account?</a>
                 </div>

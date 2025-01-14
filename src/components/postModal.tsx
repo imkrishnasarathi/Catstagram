@@ -50,19 +50,26 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                 return;
             }
 
-            // await databases.createDocument(
-            //     '677ea3cd002765dfe707', 
-            //     '677fca0b0031ef813d45',
-            //     'unique()', 
-            //     {},
-            //     // {
-            //     //     // userId: userId,
-            //     //     imageUrl: finalImageUrl,
-            //     //     caption,
-            //     //     createdAt: new Date().toISOString(),
-            //     // },
-            //     permissions
-            // );
+            interface DocumentData {
+                userId: string;
+                imageUrl: string;
+                caption: string;
+                createdAt: string;
+            }
+
+            const data: DocumentData = {
+                userId: userId,
+                imageUrl: finalImageUrl,
+                caption,
+                createdAt: new Date().toISOString(),
+            }
+
+            await databases.createDocument(
+                '677ea3cd002765dfe707', 
+                '677fca0b0031ef813d45',
+                'unique()',
+                data,
+            );
 
             alert('Post created successfully!');
             onClose();

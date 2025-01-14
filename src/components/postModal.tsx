@@ -9,7 +9,6 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
     const [uploadFile, setUploadFile] = useState<File | null>(null);
     const [useAIImage, setUseAIImage] = useState(false);
 
-    
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         
@@ -50,7 +49,7 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                 return;
             }
 
-            interface DocumentData {
+            interface DocumentData{
                 userId: string;
                 imageUrl: string;
                 caption: string;
@@ -62,7 +61,7 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                 imageUrl: finalImageUrl,
                 caption,
                 createdAt: new Date().toISOString(),
-            }
+            };
 
             await databases.createDocument(
                 '677ea3cd002765dfe707', 
@@ -98,12 +97,12 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                     <button
                         type="button"
                         onClick={() => {
-                            setUseAIImage(true);
+                            setUseAIImage((prev) => !prev);
                             setAiPrompt('');
                             setUploadFile(null);
                         }}
                     >
-                        Use AI Image
+                        {useAIImage ? 'Upload Your Own Image' : 'Use AI Image'}
                     </button>
                 </div>
                 {useAIImage ? (

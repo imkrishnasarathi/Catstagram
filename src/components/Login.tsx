@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { account, client } from '../appwrite.ts';
+import './Login.css';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');

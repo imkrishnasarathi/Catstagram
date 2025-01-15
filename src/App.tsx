@@ -3,6 +3,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import GuestAccess from './components/guestAccess';
+import UserPage from './components/userPage';
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/guest" element={<GuestAccess />} />
+        <Route path="/yourprofile" element={<UserPage />}/>
       </Routes>
     </Router>
   );

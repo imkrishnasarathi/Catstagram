@@ -1,5 +1,5 @@
 import React from 'react';
-// import './userPage.css';
+import './userPage.module.css';
 
 const UserPage: React.FC = () => {
     const user = {

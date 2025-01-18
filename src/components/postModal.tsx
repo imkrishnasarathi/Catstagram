@@ -68,6 +68,11 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                 '677fca0b0031ef813d45',
                 'unique()',
                 data,
+                [
+                    Permission.read(Role.any()),
+                    Permission.update(Role.user(userId)),
+                    Permission.delete(Role.user(userId)),
+                ]
             );
 
             alert('Post created successfully!');

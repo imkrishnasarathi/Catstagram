@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { databases, account, storage } from '../appwrite';
 import { Permission, Role } from 'appwrite';
-import './postModal.css';
+import './postModal.module.css';
 
 const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
     const [caption, setCaption] = useState('');

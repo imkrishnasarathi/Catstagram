@@ -63,16 +63,18 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
                 createdAt: new Date().toISOString(),
             };
 
+            const permissions = [
+                Permission.read(Role.user(userId)),
+                Permission.update(Role.user(userId)),
+                Permission.delete(Role.user(userId)) 
+            ];
+
             await databases.createDocument(
                 '677ea3cd002765dfe707', 
                 '677fca0b0031ef813d45',
                 'unique()',
                 data,
-                [
-                    Permission.read(Role.any()),
-                    Permission.update(Role.user(userId)),
-                    Permission.delete(Role.user(userId)),
-                ]
+                permissions
             );
 
             alert('Post created successfully!');

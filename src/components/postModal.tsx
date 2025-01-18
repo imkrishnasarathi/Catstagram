@@ -9,6 +9,10 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
     const [uploadFile, setUploadFile] = useState<File | null>(null);
     const [useAIImage, setUseAIImage] = useState(false);
 
+    async function detectProfanity(prompt: string) {
+        return;
+    }
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         

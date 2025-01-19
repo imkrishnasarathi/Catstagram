@@ -39,7 +39,6 @@ const UserPage: React.FC = () => {
     if (error) {
         return <div>{error}</div>;
     }
-    console.log(user.username);
     return (
         <div className="user-page">
             <div className="profile-header">

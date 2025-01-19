@@ -11,19 +11,16 @@ const UserRoute = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Create a function to handle the check
     const checkUserValidity = async () => {
       try {
-        // Only proceed if username is not undefined
         if (username) { 
           const users = await databases.listDocuments(
-            '677ea3cd002765dfe707', // Database ID
-            '678cc078000962acff1f', // Collection ID
-            [Query.equal('username', username)] // Dynamically use the username
+            '677ea3cd002765dfe707', 
+            '678cc078000962acff1f', 
+            [Query.equal('username', username)] 
           );
           setIsValidUser(users.total > 0);
         } else {
-          // Handle the case where username is undefined (e.g., set isValidUser to false)
           setIsValidUser(false);
         }
       } catch (error) {

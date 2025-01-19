@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { account } from "../appwrite";
+import { account, databases } from "../appwrite";
 import { ID } from "appwrite";
 
 function SignUp(){
@@ -10,8 +10,13 @@ function SignUp(){
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await account.create(ID.unique(), email, password, userName);
+            const user = await account.create(ID.unique(), email, password, userName);
             alert('Account created successfully');
+            await databases.createDocument('677ea3cd002765dfe707', '678cc078000962acff1f', "unique()", {
+                username: userName,
+                userId: user.$id,
+                email: email,
+            });
         } catch (error) {
             alert('Failed to create account');
             console.log(error);

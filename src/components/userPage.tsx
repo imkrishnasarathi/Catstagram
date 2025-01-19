@@ -1,17 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import './userPage.module.css';
+import { account } from '../appwrite';
 
 const UserPage: React.FC = () => {
-    const user = {
-        username: 'catlover123',
-        fullName: 'Cat Lover',
-        bio: 'I love cats! 🐱',
-        profilePicture: 'https://via.placeholder.com/150',
-        posts: 120,
-        followers: 300,
-        following: 180,
-    };
+    const { username } = useParams();
+    const [user, setUser] = useState<any>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
 
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const userData = await account.get();
+                setUser({
+                    username: userData.name || username,
+                    fullName: 'Cat Lover',
+                    bio: 'I love cats! 🐱',
+                    profilePicture: 'https://via.placeholder.com/150',
+                    posts: 120,
+                    followers: 300,
+                    following: 180,
+                });
+            } catch (error) {
+                setError('Failed to fetch user data');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUser();
+    }, [username]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>{error}</div>;
+    }
+    console.log(user.username);
     return (
         <div className="user-page">
             <div className="profile-header">

@@ -3,7 +3,8 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import GuestAccess from './components/guestAccess';
-import UserPage from './components/userPage';
+import NotFound from './components/NotFound'; 
+import UserRoute from './UserRoute';
 
 const App = () => {
   return (

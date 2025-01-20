@@ -15,8 +15,6 @@ const UserPage: React.FC = () => {
                 const userData = await account.get();
                 setUser({
                     username: userData.name || username,
-                    fullName: 'Cat Lover',
-                    bio: 'I love cats! 🐱',
                     profilePicture: 'https://via.placeholder.com/150',
                     posts: 120,
                     followers: 300,

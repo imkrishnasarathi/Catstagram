@@ -43,7 +43,7 @@ const PostModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen,
             } else if (uploadFile) {
                 const uploadedFile = await storage.createFile(
                     '6783c0c200272f9370bf',
-                    'unique()', // Unique file ID
+                    'unique()',
                     uploadFile,
                 );
 

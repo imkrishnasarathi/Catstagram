@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { account, client } from '../appwrite.ts';
 import styles from './Login.module.css';
 

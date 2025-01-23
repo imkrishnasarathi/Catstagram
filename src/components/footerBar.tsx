@@ -1,4 +1,3 @@
-import React from 'react';
 import { AppBar, Toolbar, IconButton } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import NewPostIcon from '@mui/icons-material/Add';

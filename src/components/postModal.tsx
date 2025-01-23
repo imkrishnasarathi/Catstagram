@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { databases, account, storage } from '../appwrite';
 import { Permission, Role } from 'appwrite';
 import './postModal.module.css';

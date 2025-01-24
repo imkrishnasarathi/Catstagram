@@ -73,10 +73,12 @@ const PostSection: React.FC = () => {
     const handleLoadMore = () => {
         setLoadingMore(true);
         setTimeout(() => {
+            
             setPosts((prevPosts) => [...prevPosts, ...Array(3).fill(null)]);
             setLikedPosts((prevLikes) => [...prevLikes, ...Array(3).fill(false)]);
             setLoadingMore(false);
         }, 1000);
+        
     };
 
     const toggleLike = (index: number) => {

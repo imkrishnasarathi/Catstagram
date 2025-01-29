@@ -5,6 +5,4 @@ Instagram, but for cats!
 - Front End:
   - React (Typescript)
   - Vanilla CSS
-- Backend:
-  - Appwrite
 

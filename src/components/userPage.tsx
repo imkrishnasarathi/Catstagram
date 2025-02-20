@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './userPage.module.css';
+import styles from './userPage.module.css';
 import { account } from '../appwrite';
 
 const UserPage: React.FC = () => {
@@ -38,16 +38,16 @@ const UserPage: React.FC = () => {
         return <div>{error}</div>;
     }
     return (
-        <div className="user-page">
-            <div className="profile-header">
-                <img src={user.profilePicture} alt="Profile" className="profile-picture" />
-                <div className="profile-info">
+        <div className={styles['user-page']}>
+            <div className={styles['user-page__profile-header']}>
+                <img src={user.profilePicture} alt="Profile" className={styles['user-page__profile-picture']} />
+                <div className={styles['user-page__profile-info']}>
                     <h2>{user.username}</h2>
                     <p>{user.fullName}</p>
                     <p>{user.bio}</p>
                 </div>
             </div>
-            <div className="profile-stats">
+            <div className={styles['user-page__profile-stats']}>
                 <div>
                     <strong>{user.posts}</strong> posts
                 </div>
